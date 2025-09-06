@@ -311,22 +311,91 @@ body {
   border: 4px solid #000;
 }
 
-.hero-content h1 {
-  font-size: 100px;
-  font-weight: 1200;
-  text-transform: uppercase;
-  margin: -100px 100px 100px 0;
-  line-height: 1.1;
-  font-family: "Chakra Petch", sans-serif;
+.hero-name {
+  position: relative;
+  margin: -100px 0 80px 0;
+  display: block;
 }
 
-.hero-content h1 span {
+.name-part {
+  font-size: 100px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-family: "Chakra Petch", sans-serif;
+  position: relative;
   display: inline-block;
-  background: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  padding: 0 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.name-first {
+  background: #fff;
+  color: #000;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0px #000;
+  padding: 10px 20px;
+  transform: rotate(-1deg);
+  margin-bottom: -20px; /* Overlap with second name */
+  display: block;
+  width: fit-content;
+}
+
+.name-last {
+  background: #000;
+  color: #fff;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0px #ff00ff;
+  padding: 10px 20px;
   transform: rotate(-2deg);
-  box-shadow: 6px 6px 0px #ff00ff, 6px 6px 0px #ff00ff;
+  margin-left: 80px; /* Reduce from 100px */
+  display: block;
+  width: fit-content;
+}
+
+.hero-content {
+  max-width: 800px;
+  z-index: 1;
+}
+
+/* Hover Effects */
+.name-first:hover {
+  box-shadow: 20px 20px 0px #000;
+  transform: rotate(-1deg) translate(-6px, -6px);
+}
+
+.name-last:hover {
+  box-shadow: 20px 20px 0px #ff00ff;
+  transform: rotate(-2deg) translate(-6px, -6px);
+}
+
+/* Glare Effect */
+.name-part::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255,255,255,0.4) 40%, 
+    rgba(255,255,255,0.8) 50%, 
+    rgba(255,255,255,0.4) 60%, 
+    transparent 100%);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.name-part:hover::before {
+  animation: glareEffect 0.6s ease-in-out;
+}
+
+@keyframes glareEffect {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  51% { left: -100%; }
+  100% { left: 100%; }
 }
 
 .hero-content p {
